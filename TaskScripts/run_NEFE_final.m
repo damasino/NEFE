@@ -1,4 +1,7 @@
 function runAll()
+% Created on 5/10/2015
+% By Dianna Amasino
+
 % This runs the NEFE decision making experiment
     %ask for subID and condition
     subID = input('Enter Subject-ID: ', 's');

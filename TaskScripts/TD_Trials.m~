@@ -20,8 +20,7 @@ money2=10;
 delay1='Today';
 delay2=[1 7 15 30 90 180 365];
 
-% Create cell array with all possible combos for immediate money and delay
-% times (delayed money is always $10 and shorter delay is always "today")
+% Create cell array with all possible combos
 trials=length(money1)*length(delay2);
 ones(1:trials+3)=1;
 %practice trials
@@ -37,11 +36,9 @@ money2nd=cell2mat(money2Cell);
 
 delay1Cell=repmat({delay1},trials+3,1);
 
-%Calculate the k-value for each choice (as if it were the indifference pt)
 k=(money2nd(1:trials+3)./start(1:trials+3,1)-1)./start(1:trials+3,2);
 k2=mat2cell(k,ones,1);
 
-%Combine all parts of each trial
 all=[startCell(1:trials+3,1) delay1Cell money2Cell startCell(1:trials+3,2) k2];
 
 %randomize trial order

@@ -13,7 +13,8 @@ outdir=strcat('C:\Users\dra12\Documents\NEFE\Data\Behavioral\', num2str(subID));
 TD_outdir=strcat(outdir, '\TD_',num2str(subID),'.mat');
 load(TD_outdir ,'data') ;
 
-%Pick a random TD trial and resp: 1 = immediate option, 2 = delayed option
+%Pick a random TD trial and find the response on that tria:
+% 1 means they chose the immdiate option, 2 means they chose the delay
 numtrials=data.trial(end);
 randtrial=randperm(numtrials);
 trial=randtrial(1);
@@ -41,6 +42,7 @@ if rand()>.5
     Impulse_outdir=strcat(outdir,'\Impulse_',num2str(subID),'.mat');
     load(Impulse_outdir ,'data') ;
     
+    %Choose random trial
     numtrials=data.trial(end);
     randtrial=randperm(numtrials);
     trial=randtrial(1); 
@@ -56,6 +58,7 @@ if rand()>.5
     elseif ImpResp==5;
         resp=lose;
     end
+   
     currprice=data.currentPrice{1,trial};
     item=data.item{1,trial};
     
@@ -91,7 +94,6 @@ else
     end
 end
 
-%Write output file
 outfid = 'ImpulsePayout.txt';
 output = fullfile(outdir,outfid);
 fileID = fopen(output,'w');
@@ -99,3 +101,6 @@ fprintf(fileID,['We randomly selected %s and trial %d on which you chose \n' ...
     'to %s the %s, at a price of $%.2f. \n You will get a $%.2f ' ...
     'Amazon gift card and %s item.'] ,task,trial, resp, item, currprice,giftcard,buy);
 fclose(fileID);
+
+%save(output,'task','trial','resp','item','currprice','giftcard','buy')
+
